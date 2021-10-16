@@ -1,4 +1,4 @@
-from rental import Rental
+from rental import Rental, PriceCode
 from movie import Movie
 
 
@@ -34,7 +34,6 @@ class Customer:
         fmt = "{:32s}    {:4s} {:6s}\n"
         statement += fmt.format("Movie Title", "Days", "Price")
         fmt = "{:32s}   {:4d} {:6.2f}\n"
-        
         for rental in self.rentals:
             amount = rental.get_price
             # award renter points
@@ -56,8 +55,8 @@ class Customer:
 if __name__ == "__main__":
     customer = Customer("Edward Snowden")
     print(customer.statement())
-    movie = Movie("Hacker Noon", Movie.REGULAR)
+    movie = Movie("Hacker Noon", PriceCode.regular)
     customer.add_rental(Rental(movie, 2))
-    movie = Movie("CitizenFour", Movie.NEW_RELEASE)
+    movie = Movie("CitizenFour", PriceCode.new_release)
     customer.add_rental(Rental(movie, 3))
     print(customer.statement())
