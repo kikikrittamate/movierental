@@ -1,6 +1,4 @@
 from enum import Enum
-from movie import Movie
-import logging
 
 
 class PriceCode(Enum):
@@ -20,11 +18,6 @@ class PriceCode(Enum):
         "Return the rental price for a given number of days"""
         pricing = self.value["price"]    # the enum member's price formula
         return pricing(days)
-
-    def renter_points(self, days: int) -> int:
-        """Return the the rental points for a given number of days."""
-        frp = self.value["frp"]  # the enum member's frp formula
-        return frp(days)
 
 
 class Rental:
