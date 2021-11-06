@@ -12,11 +12,12 @@ class Movie:
     NEW_RELEASE = 1
     CHILDREN = 2
 
-    def __init__(self, title: str, year: int, genre: List[str]):
+    def __init__(self, title: str, year: int, genre: List[str], price_code):
         # Initialize a new movie.
         self._title = title
         self._year = year
         self._genre = genre
+        self._price_code = price_code
 
     def get_title(self):
         # get the title
@@ -33,6 +34,10 @@ class Movie:
     def is_genre(self, genre: str):
         # check if the genre is the same
         return genre in self._genre
+
+    def get_price_code(self):
+        # get the price code
+        return self._price_code
 
     def __str__(self):
         return self._title
