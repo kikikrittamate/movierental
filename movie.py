@@ -1,5 +1,7 @@
 from typing import List
 
+import csv
+
 
 class Movie:
     """
@@ -35,3 +37,22 @@ class Movie:
 
     def __str__(self):
         return self.title
+
+
+class MovieCatalog:
+    data_file = 'movie.csv'
+
+    def __init__(self):
+        self.movie_list = {}
+        with open(self.data_file) as file:
+            reader = csv.DictReader(file)
+        for movie in reader:
+            self.movie_list[movie["title"]] = {
+                "#id": movie["#id"],
+                "year": movie["year"],
+                "genre": [genre for genre in movie["genres"].split("|")]
+            }
+
+    def get_movie(self, title):
+        movie = self.movie_list[title]
+        return Movie(title, movie["year"], movie["genre"])
