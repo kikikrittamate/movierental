@@ -31,28 +31,22 @@ class Rental:
         return self.days_rented
 
     def get_price(self):
-        return self.movie.price_code.price(self.days_rented)
+        return self.get_movie().get_price_code().price(self.days_rented)
 
     def get_renter_points(self):
-        # award renter points
-        frequent_renter_points = 0
-        if self.get_movie().get_price_code() == PriceCode.new_release:
-            frequent_renter_points += self.get_days_rented()
-        else:
-            frequent_renter_points += 1
-        return frequent_renter_points
+        return self.get_movie().get_price_code().renter_points(self.days_rented)
 
     def for_movie(self, movie: Movie):
         current_year = datetime.now().year
         if current_year == movie.get_year():
             return PriceCode.new_release
-        if movie.get_genre == "Children":
+        if movie.is_genre("Children"):
             return PriceCode.children
         return PriceCode.regular
 
 
 class PriceCode(Enum):
-    """An enumeration for different kinds of movies and their behavior."""
+    """An enumeration for different kinds of movies and their behavior"""
 
     new_release = {"price": lambda days: 3.0 * days,
                    "frp": lambda days: days
@@ -66,5 +60,10 @@ class PriceCode(Enum):
 
     def price(self, days: int) -> float:
         "Return the rental price for a given number of days"""
-        pricing = self.value["price"]    # the enum member's price formula
+        pricing = self.value["price"]  # the enum member's price formula
         return pricing(days)
+
+    def renter_points(self, days: int) -> int:
+        """Return the the rental points for a given number of days."""
+        frp = self.value["frp"]  # the enum member's frp formula
+        return frp(days)
