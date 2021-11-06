@@ -20,22 +20,22 @@ class Movie:
 
     def get_title(self):
         # get the title
-        return self.title
+        return self._title
 
     def get_year(self):
         # get the year
-        return self.year
+        return self._year
 
     def get_genre(self):
         # get the genre
-        return self.genre
+        return self._genre
 
     def is_genre(self, genre: str):
         # check if the genre is the same
         return genre in self._genre
 
     def __str__(self):
-        return self.title
+        return self._title
 
 
 class MovieCatalog:
