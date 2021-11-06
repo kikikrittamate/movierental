@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Movie:
     """
     A movie available for rent.
@@ -7,7 +10,7 @@ class Movie:
     NEW_RELEASE = 1
     CHILDREN = 2
 
-    def __init__(self, title, year, genre, price_code):
+    def __init__(self, title: str, year: int, genre: List[str], price_code):
         # Initialize a new movie.
         self.title = title
         self.year = year
